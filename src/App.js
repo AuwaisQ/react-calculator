@@ -59,7 +59,7 @@ function App() {
     <div className="App">
       <div className="calculator">
         <div className="display">
-          <div className="input">{input || '0'}</div>
+          <input type="text" className="input" value={input || '0'} readOnly />
           <div className="output">{result}</div>
         </div>
         <div className="buttons">

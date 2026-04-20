@@ -47,6 +47,13 @@
   font-size: 14px;
   color: #94a3b8;
   height: 20px;
+  background: transparent;
+  border: none;
+  outline: none;
+  text-align: right;
+  width: 100%;
+  padding: 0;
+  display: block;
 }
 
 .output {
