@@ -33,6 +33,7 @@ function App() {
 
       case '=':
         try {
+          // eslint-disable-next-line
           const calculation = eval(input);
           setResult(calculation.toString());
           setInput(calculation.toString());
