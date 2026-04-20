@@ -3,7 +3,7 @@ import './App.css';
 
 function App() {
   const [input, setInput] = useState('');
-  const [result, setResult] = useState('0');
+  const [result, setResult] = useState('');
 
   const buttons = [
     { label: '7', type: 'num' },
@@ -28,12 +28,11 @@ function App() {
     switch (value) {
       case 'C':
         setInput('');
-        setResult('0');
+        setResult('');
         break;
 
       case '=':
         try {
-          // eslint-disable-next-line
           const calculation = eval(input);
           setResult(calculation.toString());
           setInput(calculation.toString());
@@ -59,7 +58,7 @@ function App() {
     <div className="App">
       <div className="calculator">
         <div className="display">
-          <input type="text" className="input" value={input || '0'} readOnly />
+          <input type="text" className="input" value={input} readOnly />
           <div className="output">{result}</div>
         </div>
         <div className="buttons">
