@@ -1,23 +1,79 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [input, setInput] = useState('');
+  const [result, setResult] = useState('0');
+
+  const buttons = [
+    { label: '7', type: 'num' },
+    { label: '8', type: 'num' },
+    { label: '9', type: 'num' },
+    { label: '+', type: 'op' },
+    { label: '4', type: 'num' },
+    { label: '5', type: 'num' },
+    { label: '6', type: 'num' },
+    { label: '-', type: 'op' },
+    { label: '1', type: 'num' },
+    { label: '2', type: 'num' },
+    { label: '3', type: 'num' },
+    { label: '*', type: 'op' },
+    { label: 'C', type: 'special' },
+    { label: '0', type: 'num' },
+    { label: '=', type: 'special' },
+    { label: '/', type: 'op' },
+  ];
+
+  const handleButtonClick = (value) => {
+    switch (value) {
+      case 'C':
+        setInput('');
+        setResult('0');
+        break;
+
+      case '=':
+        try {
+          // eslint-disable-next-line
+          const calculation = eval(input);
+          setResult(calculation.toString());
+          setInput(calculation.toString());
+        } catch (error) {
+          setResult('Error');
+        }
+        break;
+
+      default:
+        const lastChar = input.slice(-1);
+        const operators = ['+', '-', '*', '/'];
+
+        if (operators.includes(value) && operators.includes(lastChar)) {
+          setInput(input.slice(0, -1) + value);
+        } else {
+          setInput(input + value);
+        }
+        break;
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="calculator">
+        <div className="display">
+          <div className="input">{input || '0'}</div>
+          <div className="output">{result}</div>
+        </div>
+        <div className="buttons">
+          {buttons.map((btn, index) => (
+            <button
+              key={index}
+              className={`btn-${btn.type}`}
+              onClick={() => handleButtonClick(btn.label)}
+            >
+              {btn.label}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
